@@ -10,22 +10,27 @@
 	<script>
 		function secondHighest(arr) {
 			//Write your code here
-			arr = arr.map(number).filter(num => !isNaN(num));
-			if(arr.length<2){
-				return "No second highest found";
-			}
-			let max  = -Infinity,secondMax = -Infinity;
-			for(let num of arr){
-				if(num>max){
-					secondMax = max;
-					max = num;
-				}
-				else if(num>secondMax && num !== max){
-					secondMax = num;
-				}
-			}
-			return secondMax === -Infinity ? "No second highest found":secondMax;
-			
+			 arr = arr.map(Number);
+
+    // Step 2: Agar array empty hai ya sirf ek element hai ya sab same hain, to -Infinity return karna hai
+    if (arr.length < 2 || new Set(arr).size === 1) {
+        return -Infinity;
+    }
+
+    // Step 3: Maximum aur second maximum find karna hai
+    let max = -Infinity;
+    let secondMax = -Infinity;
+
+    for (let num of arr) {
+        if (num > max) {
+            secondMax = max; // Pehle ka max ab second max ban gaya
+            max = num;       // Naya max update ho gaya
+        } else if (num > secondMax && num < max) {
+            secondMax = num; // Sirf tab update hoga jab ye max se chhota hoga
+        }
+    }
+
+    return secondMax;
 			
 			
 		}
